@@ -5,6 +5,7 @@ author:
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
+    seal: false
     css: xaringan-themer.css
     nature:
       slideNumberFormat: "%current%"
@@ -15,23 +16,34 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
+class: hide-count
 
-```{r setup, include=FALSE}
+```{r packages, include = FALSE, warning = FALSE, echo = FALSE, cache = FALSE}
+library(RefManageR)
+library(bibtex)
+library(rmdref)
+library(xaringanthemer)
+library(ftolr)
+library(tidyverse)
+
+source("R/functions.R")
+```
+
+```{r setup, include = FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(
   fig.width = 9, fig.height = 3.5, fig.retina = 3,
   out.width = "100%",
   cache = FALSE,
-  echo = TRUE,
+  echo = FALSE,
   message = FALSE, 
   warning = FALSE,
   hiline = TRUE
 )
+```
 
+```{r bib-opts, include = FALSE}
 # Set up references
-library(RefManageR)
-library(bibtex)
-library(rmdref)
 BibOptions(
   check.entries = FALSE, 
   bib.style = "authoryear", 
@@ -41,7 +53,6 @@ BibOptions(
   hyperlink = FALSE, 
   longnamesfirst = FALSE,
   dashed = FALSE)
-
 ```
 
 ```{r load-full-refs, include = FALSE, warning = FALSE, cache = TRUE}
@@ -56,6 +67,11 @@ refs_all <- c(main_library, refs_other)
 # Filter to only needed references
 filter_refs_bib(
   "index.Rmd", bib_in = refs_all, bib_out = "references.bib")
+
+# Strip URL field from bib file
+read_lines("references.bib") %>%
+  magrittr::extract(str_detect(., "url = |urldate =", negate = TRUE)) %>%
+  write_lines("references.bib")
 ```
 
 ```{r load-bib, include = FALSE, warning = FALSE}
@@ -64,7 +80,6 @@ bib <- ReadBib("references.bib")
 ```
 
 ```{r xaringan-themer, include = FALSE, warning = FALSE}
-library(xaringanthemer)
 style_duo_accent(
   primary_color = "#1381B0",
   secondary_color = "#FF961C",
@@ -72,10 +87,25 @@ style_duo_accent(
   text_font_size = "1.2rem",
   extra_css = list(
     ".small" = list("font-size" = "90%"),
-    ".xxl" = list("font-size" = "400%")
+    ".xxl" = list("font-size" = "400%"),
+    ".hide-count .remark-slide-number" = list("display" = "none")
   )
 )
 ```
+
+<br>
+# DNA Barcoding of Fern Gametophytes:<br>Past, Present, and Future
+
+### Joel H. Nitta  
+University of Tokyo
+
+
+XVI Conference of the<br>Indian Fern Society  
+2022.03.18
+
+<img src="images/title_back.png" height="200" style="position:absolute; right:80px; top:300px;">
+
+---
 
 ## Preprint
 
@@ -131,25 +161,94 @@ Use of one\* DNA locus for identifying species `r cite_p(c("@Hebert2003", "@Hebe
 
 ---
 
-## Why barcode fern gametophytes?
+```{r intersp-dist, cache = TRUE}
+# Load rbcL for ferns
+rbcL <- ft_seqs(loci = "rbcL", drop_og = TRUE, del_gaps = FALSE)
 
-.pull-left[
-Identify __field-collected gametophytes__
-]
+# Make tibble of rbcL sampling, subset to genera with >1 species
+rbcL_sampling <-
+  tibble(
+    species = rownames(rbcL)
+  ) %>%
+  mutate(genus = str_split(species, "_") %>% map_chr(1)) %>%
+  add_count(genus) %>%
+  filter(n > 1) 
+
+# Calculate mean interspecific distances within each genus
+mean_rbcL_gen <-
+  map_df(
+    unique(rbcL_sampling$genus),
+    ~calc_intersp_by_genus(rbcL, ., rbcL_sampling)
+  )
+
+mean_rbcl_dist <- scales::percent(mean(mean_rbcL_gen$mean), accuracy = 0.01)
+mean_rbcl_dist_sd <- scales::percent(mean(mean_rbcL_gen$sd, na.rm = TRUE), accuracy = 0.01)
+n_sp <- rbcL_sampling %>% pull(species) %>% n_distinct() %>% scales::number(big.mark = ",")
+n_gen <- rbcL_sampling %>% pull(genus) %>% n_distinct() %>% scales::number(big.mark = ",")
+
+```
+
+## Why DNA barcoding of ferns?
+
+--
+
+### 1. Primary taxonomy
+
+--
+
+DNA sequences provide __objective evidence of species status__
+
+Mean infrageneric, interspecific *rbcL* distance across ferns: __`r mean_rbcl_dist` ± `r mean_rbcl_dist_sd`__  
+(*n* = `r n_sp` species, `r n_gen` genera; Nitta, in prep.)
+
+.footnote[mean ± SD]
+
+---
+
+## Why DNA barcoding of ferns?
+
+### 1. Primary taxonomy
+
+DNA sequences provide __objective evidence of species status__
+
+Mean infrageneric, interspecific *rbcL* distance across ferns: __`r mean_rbcl_dist` ± `r mean_rbcl_dist_sd`__  
+(*n* = `r n_sp` species, `r n_gen` genera; Nitta, in prep.)
+
+### Phylogenetic analysis can make new species descriptions __more robust__
+
+.footnote[mean ± SD]
+
+---
+
+## Why DNA barcoding of ferns?
+
+### 2. Identify field-collected gametophytes
 
 .center[<img src="images/sessa_life_cycle.jpg" height="400">]
 
 ---
 
-## Why barcode fern gametophytes?
+## Why DNA barcoding of ferns?
+
+### 2. Identify field-collected gametophytes
+
+.center[<img src="images/sessa_life_cycle_question.jpg" height="400">]
+
+---
+
+```{r bib-opts-2, include = FALSE}
+# Set up references
+BibOptions(max.names = 2)
+```
+
+## Why DNA barcoding of ferns?
 
 .pull-left[
 
-> "In combination these aspects of __prothallial morphology serve to characterize most of the larger groups of homosporous ferns__, nearly as clearly as sporophyte morphology"
+> "In combination these aspects of __prothallial morphology serve to characterize most of the larger groups of homosporous ferns__, nearly as clearly as sporophyte morphology"  
+.small[`r cite_t("@Nayar1971")`]
 
 Gametophyte morphology is important for systematics, but __cannot be relied on to consistently identify species__
-
-.footnote[`r cite_t("@Nayar1971")`]
 
 ]
 
@@ -159,9 +258,14 @@ Gametophyte morphology is important for systematics, but __cannot be relied on t
 ]
 ]
 
+```{r bib-opts-3, include = FALSE}
+# Set up references
+BibOptions(max.names = 1)
+```
+
 ---
 
-## Why barcode fern gametophytes?
+## Why DNA barcoding of ferns?
 
 .pull-left[
 A, B: __Cordate__ (many terrestrial species)  
@@ -175,7 +279,7 @@ E, F: __Filamentous__  (e.g., Schizaeaceae, Hymenophyllaceae)
 
 ---
 
-## Why barcode fern gametophytes?
+## Why DNA barcoding of ferns?
 
 .pull-left[
 __Cordate__  
@@ -220,6 +324,14 @@ F: *Abrodictyum dentatum*(Bosch) Ebihara & K.Iwats.
 
 .center[
 <img src="images/barcode_flow.png" height="450">
+]
+
+---
+
+## Typical approach
+
+.center[
+<img src="images/barcode_flow_2.png" height="450">
 ]
 
 ---
@@ -430,6 +542,10 @@ class: inverse, center, middle
 
 High-throughput methods could allow for **continuous monitoring over time and space** of gametophyte populations
 
+.center[<img src="https://www.pacb.com/wp-content/uploads/Evolution-of-sequencing-technology.jpg" height="260">]
+
+.footnote[https://www.pacb.com/]
+
 ---
 
 ## Next-Gen DNA sequencing: Microfluidic PCR
@@ -471,7 +587,7 @@ High-throughput methods could allow for **continuous monitoring over time and sp
 
 .pull-right[
 .center[<img src="images/kuo_2022_3.png" height="350">]
-.small[L-Y Kuo]
+.small[Photo: L.-Y. Kuo]
 ]
 
 ---
