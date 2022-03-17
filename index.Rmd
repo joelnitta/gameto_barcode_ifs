@@ -469,7 +469,10 @@ High-throughput methods could allow for **continuous monitoring over time and sp
 .footnote[`r cite_t(c("@Li2009", "@Wu2022"))`]
 ]
 
-<img src="images/kuo_2022_1.png" height="400" style="position:absolute; right:60px; top:140px;">
+.pull-right[
+.center[<img src="images/kuo_2022_3.png" height="350">]
+.small[L-Y Kuo]
+]
 
 ---
 
@@ -515,16 +518,30 @@ PrintBibliography(bib, start = 1, end = 4)
 
 ---
 
+## References (cont.)
+
 .small[
 ```{r refs-2, results = "asis", echo = FALSE}
-PrintBibliography(bib, start = 5, end = 9)
+PrintBibliography(bib, start = 5, end = 8)
 ```
 ]
 
 ---
 
+## References (cont.)
+
 .small[
 ```{r refs-3, results = "asis", echo = FALSE}
-PrintBibliography(bib, start = 10, end = length(bib))
+PrintBibliography(bib, start = 9, end = 12)
+```
+]
+
+---
+
+## References (cont.)
+
+.small[
+```{r refs-4, results = "asis", echo = FALSE}
+PrintBibliography(bib, start = 13, end = length(bib))
 ```
 ]
