@@ -37,7 +37,7 @@ BibOptions(
   bib.style = "authoryear", 
   cite.style = "authoryear", 
   style = "markdown",
-  max.names = 2,
+  max.names = 1,
   hyperlink = FALSE, 
   longnamesfirst = FALSE,
   dashed = FALSE)
@@ -46,6 +46,7 @@ BibOptions(
 
 ```{r load-full-refs, include = FALSE, warning = FALSE, cache = TRUE}
 # Read in full reference library
+# CLEAR THE CACHE IF THESE FILES ARE CHANGED
 refs_other <- ReadBib("refs_other.bib")
 main_library <- ReadBib("main_library.bib", check = FALSE)
 refs_all <- c(main_library, refs_other)
@@ -54,7 +55,7 @@ refs_all <- c(main_library, refs_other)
 ```{r filter-refs, include = FALSE, warning = FALSE}
 # Filter to only needed references
 filter_refs_bib(
-  "gameto_barcoding.Rmd", bib_in = refs_all, bib_out = "references.bib")
+  "index.Rmd", bib_in = refs_all, bib_out = "references.bib")
 ```
 
 ```{r load-bib, include = FALSE, warning = FALSE}
@@ -465,7 +466,7 @@ High-throughput methods could allow for **continuous monitoring over time and sp
 - Used to survey *Lomariopsis* in Taiwan
 - Possible to combine with next-gen sequencing?
 
-.footnote[`r cite_t("@Li2009")`]
+.footnote[`r cite_t(c("@Li2009", "@Wu2022"))`]
 ]
 
 <img src="images/kuo_2022_1.png" height="400" style="position:absolute; right:60px; top:140px;">
@@ -479,7 +480,7 @@ High-throughput methods could allow for **continuous monitoring over time and sp
 - __Used to survey *Lomariopsis* in Taiwan__
 - Possible to combine with next-gen sequencing?
 
-.footnote[`r cite_t("@Li2009")`]
+.footnote[`r cite_t(c("@Li2009", "@Wu2022"))`]
 ]
 
 <img src="images/kuo_2022_2.png" height="360" style="position:absolute; right:30px; top:140px;">
