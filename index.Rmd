@@ -109,15 +109,15 @@ XVI Conference of the<br>Indian Fern Society
 
 ## Preprint
 
-#### Nitta and Chambers 2022 *Apps. in Plant Sci.* (in press)<br>https://ecoevorxiv.org/dr25p/
+- #### Nitta and Chambers 2022 *Apps. in Plant Sci.* (in press)<br>https://ecoevorxiv.org/dr25p/
 
 ## Slides
 
-### https://joelnitta.github.io/gameto_barcode_ifs
+- ### https://joelnitta.github.io/gameto_barcode_ifs
 
 ## More Info
 
-### https://joelnitta.com
+- ### https://joelnitta.com
 
 ---
 class: center, middle
@@ -141,6 +141,8 @@ Use of one\* DNA locus for identifying species `r cite_p(c("@Hebert2003", "@Hebe
 
 .pull-right[
 <img src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-021-81087-w/MediaObjects/41598_2021_81087_Fig10_HTML.png?as=webp" height="260">
+<br><br>
+<img src="images/orchid_barcodes.png" height="110">
 <br>.small[`r cite_t("@Li2021a")`]
 ]
 
@@ -234,7 +236,7 @@ Mean infrageneric, interspecific *rbcL* distance across ferns: __`r mean_rbcl_di
 
 ## Why DNA barcoding of ferns?
 
-### 2. Identify field-collected gametophytes
+### Knowlege of gametophyte ecology is practically nil compared to sporophytes
 
 .center[<img src="images/sessa_life_cycle_question.jpg" height="400">]
 
@@ -451,20 +453,52 @@ class: inverse, center, middle
 ---
 
 ## Case study 1: Independent gametophytes in Japan
+<br>
+.middle[.center[<img src="images/indep_gameto.png" height="450">]]
 
-.pull-left[
-- __Focus on gametophyte mats__
-- *Hymenophyllum mikawanum*: sporophyte endangered
-- *Haplopteris mediosora*: sporophyte extremely rare
-- *Antrophyum plantagineum*: sporophyte unknown in Japan
+---
+
+## Case study 1: Independent gametophytes in Japan
+
+__Focus on gametophyte mats__
+
+- *Hymenophyllum mikawanum* (Seriz.) Seriz.:<br> sporophyte endangered
+- *Haplopteris mediosora* (Hayata) X.C.Zhang:<br> sporophyte extremely rare
+- *Antrophyum plantagineum* (Cav.) Kaulf:<br> sporophyte unknown in Japan
   
 .footnote[`r cite_t("@Murakami2021")`]
-]
 
-.pull-right[
-.center[<img src="images/murakami_2021_1.png" height="245">]
-.center[<img src="images/murakami_2021_2.png" height="240">]
-]
+<img src="images/murakami_2021_1.png" height="230" style="position:absolute; right:130px; top:160px;">
+<img src="images/murakami_2021_2.png" height="220" style="position:absolute; right:130px; top:430px;">
+
+---
+
+## Case study 1: Independent gametophytes in Japan
+
+Focus on gametophyte mats
+
+- *Hymenophyllum mikawanum* (Seriz.) Seriz.:<br> __sporophyte endangered__
+- *Haplopteris mediosora* (Hayata) X.C.Zhang:<br> __sporophyte extremely rare__
+- *Antrophyum plantagineum* (Cav.) Kaulf:<br> __sporophyte unknown in Japan__
+  
+.footnote[`r cite_t("@Murakami2021")`]
+
+<img src="images/murakami_2021_1.png" height="230" style="position:absolute; right:130px; top:160px;">
+<img src="images/murakami_2021_2.png" height="220" style="position:absolute; right:130px; top:430px;">
+
+---
+
+## Case study 1: Independent gametophytes in Japan
+
+Focus on gametophyte mats
+
+- *Hymenophyllum mikawanum* (Seriz.) Seriz.:<br> sporophyte endangered
+- __*Haplopteris mediosora*__ (Hayata) X.C.Zhang:<br> sporophyte extremely rare
+- *Antrophyum plantagineum* (Cav.) Kaulf:<br> sporophyte unknown in Japan
+  
+.footnote[`r cite_t("@Murakami2021")`]
+
+<img src="images/murakami_2021_3.png" height="400" style="position:absolute; right:30px; top:160px;">
 
 ---
 
@@ -530,6 +564,73 @@ class: inverse, center, middle
 ]
 
 <img src="images/nitta_2017_2.png" height="500" style="position:absolute; right:80px; top:140px;">
+
+---
+
+## Case study 4: Hemi-epiphytism in *Vandenboschia*
+
+.pull-left[
+- Unclear if *V. collariata* was __primary__ or __secondary__ hemi-epiphyte
+
+.footnote[`r cite_t("@Nitta2009")`]
+]
+
+.pull-right[
+.center[<img src="images/nitta_2009_1.png" height="450">]
+]
+
+---
+
+## Case study 4: Hemi-epiphytism in *Vandenboschia*
+
+.pull-left[
+- Unclear if *V. collariata* was primary or secondary hemi-epiphyte
+- Find gametophytes at __base of tree__
+- Sequence DNA to confirm identity
+- ➡︎ Shows *V. collariata* is __primary hemiepiphyte__
+
+.footnote[`r cite_t("@Nitta2009")`]
+]
+
+.pull-right[
+.center[<img src="images/nitta_2009_2.png" height="230">]
+.center[<img src="images/nitta_2009_3.png" height="230">]
+]
+
+---
+
+## Case study 5: Desiccation tolerance of filmy ferns
+
+.pull-left[
+- DT is important trait in __transition of plants to life on land__
+- DT is known from both sporophytes and gametophytes of __filmy ferns__
+- Compare DT between sporophytes and gametophytes
+
+.footnote[`r cite_t("@Nitta2021")`]
+]
+
+<img src="images/nitta_2021_1.png" height="500" style="position:absolute; right:80px; top:140px;">
+
+---
+
+## Case study 5: Desiccation tolerance of filmy ferns
+
+<img src="images/nitta_2021_2_trans.png" height="520" style="position:absolute; right:80px; top:140px;">
+
+- Gametophytes have __less DT than sporophytes__
+
+.footnote[`r cite_t("@Nitta2021")`]
+
+
+---
+
+## Case study 5: Desiccation tolerance of filmy ferns
+
+<img src="images/nitta_2021_3.png" height="350" style="position:absolute; right:140px; top:240px;">
+
+- Perhaps filmy ferns rely on __gemmae and microhabitats__, not DT
+
+.footnote[`r cite_t("@Nitta2021")`]
 
 ---
 class: inverse, center, middle
