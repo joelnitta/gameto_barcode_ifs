@@ -15,10 +15,17 @@ calc_intersp_by_genus <- function(aln, genus_select, g_s_tib) {
   aln <- aln[species_select, ] %>%
     ape::del.colgapsonly()
   
-  dist <- ape::dist.dna(
-    aln, model = "raw", as.matrix = FALSE, pairwise.deletion = TRUE) %>%
+  # Calculate distances
+  dist <- ape::dist.dna(aln, model = "raw", as.matrix = TRUE, pairwise.deletion = TRUE)
+  
+  # Take only upper triangle, exclude the diagonal (self-matches)
+  dist[upper.tri(dist, diag = TRUE)] <- NA
+  
+  # Exclude NAs, convert to vector
+  dist <- dist %>%
     as.list() %>%
-    unlist()
+    unlist() %>%
+    magrittr::extract(!is.na(.))
   
   tibble(
     mean = mean(dist, na.rm = TRUE),
